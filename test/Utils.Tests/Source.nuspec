@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="https://github.com/NuGet/NuGet.Client/raw/dev/src/NuGet.Core/NuGet.Packaging/compiler/resources/nuspec.xsd">
+	<metadata>
+		<id>OpenSSL.3-Library</id>
+		<description>OpenSSL 3 Library built by MFunction.</description>
+		<authors>MFunction</authors>
+		<tags>OpenSSL, MinGW64, LinuxGeneric64</tags>
+		<projectUrl>https://dev.azure.com/XanaCN/Lyoko/_git/OpenSSL_3</projectUrl>
+		<copyright>2021-2022 Xanadu</copyright>
+		<contentFiles>
+			<files include="**/*.*" buildAction="None" copyToOutput="true" flatten="false" />
+		</contentFiles>
+	</metadata>
+	<files>
+		<file src="mingw64/openssl/bin/libcrypto-3-x64.dll" target="contentFiles/any/any/mingw64/openssl/bin/libcrypto-3-x64.dll" />
+		<file src="mingw64/openssl/bin/libssl-3-x64.dll" target="contentFiles/any/any/mingw64/openssl/bin/libssl-3-x64.dll" />
+		<file src="mingw64/openssl/bin/openssl.exe" target="contentFiles/any/any/mingw64/openssl/bin/openssl.exe" />
+		<file src="mingw64/openssl/lib64/libcrypto.a" target="contentFiles/any/any/mingw64/openssl/lib64/libcrypto.a" />
+		<file src="mingw64/openssl/lib64/libcrypto.dll.a" target="contentFiles/any/any/mingw64/openssl/lib64/libcrypto.dll.a" />
+		<file src="mingw64/openssl/lib64/libssl.a" target="contentFiles/any/any/mingw64/openssl/lib64/libssl.a" />
+		<file src="mingw64/openssl/lib64/libssl.dll.a" target="contentFiles/any/any/mingw64/openssl/lib64/libssl.dll.a" />
+		<file src="linux-generic64/openssl/bin/openssl" target="contentFiles/any/any/linux-generic64/openssl/bin/openssl" />
+		<file src="linux-generic64/openssl/lib/libcrypto.a" target="contentFiles/any/any/linux-generic64/openssl/lib/libcrypto.a" />
+		<file src="linux-generic64/openssl/lib/libcrypto.so" target="contentFiles/any/any/linux-generic64/openssl/lib/libcrypto.so" />
+		<file src="linux-generic64/openssl/lib/libcrypto.so.3" target="contentFiles/any/any/linux-generic64/openssl/lib/libcrypto.so.3" />
+		<file src="linux-generic64/openssl/lib/libssl.a" target="contentFiles/any/any/linux-generic64/openssl/lib/libssl.a" />
+		<file src="linux-generic64/openssl/lib/libssl.so" target="contentFiles/any/any/linux-generic64/openssl/lib/libssl.so" />
+		<file src="linux-generic64/openssl/lib/libssl.so.3" target="contentFiles/any/any/linux-generic64/openssl/lib/libssl.so.3" />
+	</files>
+</package>

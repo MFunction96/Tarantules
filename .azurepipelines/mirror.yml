@@ -1,0 +1,18 @@
+# Mirror
+# Mirror and publish the main branch to Github.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
+
+pool: 'Azure Self-Host Pipeline'
+
+steps:
+- task: PowerShell@2
+  inputs:
+    filePath: '.azurepipelines\scripts\mirror\azuredevops_github.ps1'
+    arguments: '-Organization $(ORGANIZATION) -Project $(PROJECT) -Repository $(REPOSITORY) -DesRepo $(DESREPO) -Branch $(BRANCH)'
+    showWarnings: true
+    pwsh: true
+    runScriptInSeparateScope: true
+  env:
+    SRC_PAT: $(SRCPAT)
+    DES_PAT: $(DESPAT)
