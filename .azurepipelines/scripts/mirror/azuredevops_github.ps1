@@ -23,19 +23,43 @@ $DesUri = "https://$env:DES_PAT@github.com/$DesRepo"
 $TmpDir = "$env:TMP/TMP_$Repository"
 $WorkFolder = "$PSScriptRoot/../../.."
 
-try {
-    Start-Process -FilePath "git" -ArgumentList "clone $SrcUri $TmpDir --single-branch --branch $Branch" -Wait -NoNewWindow
-    Set-Location $TmpDir
-    $pushArgs = "push $DesUri"
-    if ($Force) {
-        $pushArgs = "$pushArgs --force"
+$flag = $true
+for ($i = 0; $i -lt 100; ++$i)
+{
+    $Process = Start-Process -FilePath "git" -ArgumentList "clone $SrcUri $TmpDir --single-branch --branch $Branch" -Wait -NoNewWindow -PassThru
+    if ($Process.ExitCode -eq 0) {	
+        $flag = $false
+        break
     }
-    Start-Process -FilePath "git" -ArgumentList $pushArgs -Wait -NoNewWindow
 }
-catch {
-    
+
+if ($flag)
+{
+    Write-Error "Unable to clone the repository!"
+    Exit 1
 }
-finally {
-    Set-Location $WorkFolder
-    Remove-Item -Path $TmpDir -Recurse -Force
+
+Set-Location $TmpDir
+$pushArgs = "push $DesUri"
+if ($Force) {
+    $pushArgs = "$pushArgs --force"
 }
+
+$flag = $true
+for ($i = 0; $i -lt 100; ++$i)
+{
+    $Process = Start-Process -FilePath "git" -ArgumentList $pushArgs -Wait -NoNewWindow -PassThru
+    if ($Process.ExitCode -eq 0) {	
+        $flag = $false
+        break
+    }
+}
+
+if ($flag)
+{
+    Write-Error "Unable to push the repository!"
+    Exit 1
+}
+
+Set-Location $WorkFolder
+Remove-Item -Path $TmpDir -Recurse -Force
