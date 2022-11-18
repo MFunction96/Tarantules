@@ -3,8 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
 
-pool: 'Azure Self-Host Pipeline'
-
 steps:
 - task: PowerShell@2
   inputs:
