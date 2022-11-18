@@ -6,7 +6,7 @@
 steps:
 - task: PowerShell@2
   inputs:
-    filePath: '.azurepipelines\scripts\mirror\azuredevops_github.ps1'
+    filePath: '.azurepipelines/scripts/mirror/azuredevops_github.ps1'
     arguments: '-Organization $(ORGANIZATION) -Project $(PROJECT) -Repository $(REPOSITORY) -DesRepo $(DESREPO) -Branch $(BRANCH)'
     showWarnings: true
     pwsh: true
