@@ -23,6 +23,8 @@ if ($IsLinux -and [string]::IsNullOrEmpty($env:TMP))
     $env:TMP = "/tmp"
 }
 
+$env:GIT_TERMINAL_PROMPT=1
+
 $SrcUri = "https://$env:SRC_PAT@dev.azure.com/$Organization/$Project/_git/$Repository"
 $DesUri = "https://$env:DES_PAT@github.com/$DesRepo"
 $TmpDir = "$env:TMP/TMP_$Repository"
