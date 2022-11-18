@@ -31,6 +31,11 @@ $DesUri = "https://$env:DES_PAT@github.com/$DesRepo.git"
 $TmpDir = "$env:TMP/TMP_$Repository"
 $WorkFolder = "$PSScriptRoot/../../.."
 
+if ([System.IO.Directory]::Exists($TmpDir))
+{
+    [System.IO.Directory]::Delete($TmpDir, $true)
+}
+
 $flag = $true
 for ($i = 0; $i -lt 100; ++$i)
 {
