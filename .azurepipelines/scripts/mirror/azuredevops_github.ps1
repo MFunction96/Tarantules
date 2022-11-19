@@ -11,7 +11,7 @@ param(
     [Parameter(Mandatory)]
     [string] $Repository,
     [Parameter(Mandatory)]
-    [string] $DesRepo,
+    [string] $DesRepoUser,
     [Parameter(Mandatory)]
     [string] $Branch,
     [Parameter()]
@@ -23,17 +23,21 @@ if ($IsLinux -and [string]::IsNullOrEmpty($env:TMP))
     $env:TMP = "/tmp"
 }
 
-$env:GIT_TERMINAL_PROMPT=1
-
-$SrcUri = "https://$env:SRC_PAT@dev.azure.com/$Organization/$Project/_git/$Repository"
-$DesUri = "https://$env:DES_PAT@github.com/$DesRepo"
+$Base64PAT = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("`:$env:SRCPAT"))
+$SrcUri = "https://dev.azure.com/$Organization/$Project/_git/$Repository"
+$DesUri = "https://$DesRepoUser`:$env:DES_PAT@github.com/$DesRepoUser/$Repository.git"
 $TmpDir = "$env:TMP/TMP_$Repository"
 $WorkFolder = "$PSScriptRoot/../../.."
+
+if ([System.IO.Directory]::Exists($TmpDir))
+{
+    [System.IO.Directory]::Delete($TmpDir, $true)
+}
 
 $flag = $true
 for ($i = 0; $i -lt 100; ++$i)
 {
-    $Process = Start-Process -FilePath "git" -ArgumentList "clone $SrcUri $TmpDir --single-branch --branch $Branch" -Wait -NoNewWindow -PassThru
+    $Process = Start-Process -FilePath "git" -ArgumentList "-c http.extraHeader=""Authorization: Basic $Base64PAT"" clone $SrcUri $TmpDir --single-branch --branch $Branch" -Wait -NoNewWindow -PassThru
     if ($Process.ExitCode -eq 0) {	
         $flag = $false
         break

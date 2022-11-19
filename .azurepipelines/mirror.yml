@@ -7,10 +7,11 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: '.azurepipelines/scripts/mirror/azuredevops_github.ps1'
-    arguments: '-Organization $(ORGANIZATION) -Project $(PROJECT) -Repository $(REPOSITORY) -DesRepo $(DESREPO) -Branch $(BRANCH)'
+    arguments: '-Organization $(ORGANIZATION) -Project $(PROJECT) -Repository $(REPOSITORY) -DesRepoUser $(DESREPOUSER) -Branch $(BRANCH)'
     showWarnings: true
     pwsh: true
     runScriptInSeparateScope: true
   env:
     SRC_PAT: $(SRCPAT)
     DES_PAT: $(DESPAT)
+    GIT_TERMINAL_PROMPT: $true
