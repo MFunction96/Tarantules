@@ -13,8 +13,6 @@ param(
     [Parameter(Mandatory)]
     [string] $DesRepoUser,
     [Parameter(Mandatory)]
-    [string] $PATUser,
-    [Parameter(Mandatory)]
     [string] $Branch,
     [Parameter()]
     [switch] $Force
@@ -27,7 +25,7 @@ if ($IsLinux -and [string]::IsNullOrEmpty($env:TMP))
 
 $Base64PAT = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("`:$env:SRCPAT"))
 $SrcUri = "https://dev.azure.com/$Organization/$Project/_git/$Repository"
-$DesUri = "https://$PATUser`:$env:DES_PAT@github.com/$DesRepoUser/$Repository.git"
+$DesUri = "https://$DesRepoUser`:$env:DES_PAT@github.com/$DesRepoUser/$Repository.git"
 $TmpDir = "$env:TMP/TMP_$Repository"
 $WorkFolder = "$PSScriptRoot/../../.."
 
